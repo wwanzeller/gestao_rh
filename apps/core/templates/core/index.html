@@ -3,17 +3,24 @@
 {% block main %}
 <div class="row">
     <div class="col">
-      Column
+        Olá {{ usuario.funcionario.nome }}
     </div>
     <div class="col">
-      Column
+        Gerenciar:
+        <a href="{% url 'funcionario_list' %}">Funcionários</a> |
+        <a href="{% url 'departamento_list' %}">Departamentos</a>
     </div>
     <div class="col">
-     <form method="post" action="{% url 'logout' %}">
+     <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
-<!--        <button type="submit">Logout</button>-->
+        <!-- <button type="submit">Logout</button>-->
         <a href="#" onclick="this.parentNode.submit(); return false;">Logout</a>
     </form>
+    {% with empresa=usuario.funcionario.empresa %}
+        <a href="{% if empresa %}{% url 'empresa_update' empresa.id %}{% else %}{% url 'empresa_create' %}{% endif %}">
+            {% if empresa %}Atualizar Empresa{% else %}Criar Empresa{% endif %}
+        </a>
+    {% endwith %}
     </div>
   </div>
 {% endblock %}
