@@ -1,6 +1,10 @@
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView, DeleteView
+)
 from .models import Departamento
-from apps.funcionarios.models import Funcionario
 
 
 class DepartamentoList(ListView):
@@ -9,3 +13,23 @@ class DepartamentoList(ListView):
     def get_queryset(self):
         empresa_logada = self.request.user.funcionario.empresa
         return Departamento.objects.filter(empresa=empresa_logada)
+
+class DepartamentoCreate(CreateView):
+    model = Departamento
+    fields = ['nome']
+    success_url = reverse_lazy('departamento-list')
+
+    def form_valid(self, form):
+        departamento = form.save(commit=False)
+        departamento.empresa = self.request.user.funcionario.empresa
+        departamento.save()
+        return super(DepartamentoCreate, self).form_valid(form)
+
+class DepartamentoUpdate(UpdateView):
+    model = Departamento
+    fields = ['nome']
+    success_url = reverse_lazy('departamento-list')
+
+class DepartamentoDelete(DeleteView):
+    model = Departamento
+    success_url = reverse_lazy("departamento-list")
