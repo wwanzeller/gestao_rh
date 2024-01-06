@@ -3,9 +3,21 @@
 {% block title %}Atualizar Funcionário{% endblock %}
 
 {% block main %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
-</form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+    <br>
+    {% if object %}
+        <a href="{% url 'documento_create' object.id %}" class="btn btn-success">
+            Adicionar documento
+        </a>
+        <br><br>
+        {% for documento in object.documento_set.all %}
+            <a href="{{ documento.arquivo.url }}" target="_blank">{{ documento }}</a>
+            <br>
+        {% endfor %}
+
+    {% endif %}
 {% endblock %}

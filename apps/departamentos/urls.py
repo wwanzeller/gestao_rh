@@ -8,8 +8,8 @@ from .views import (
 
 
 urlpatterns = [
-    path('', DepartamentoList.as_view(), name='departamento-list'),
-    path('criar/', DepartamentoCreate.as_view(), name='departamento-create'),
-    path('atualizar/<int:pk>/', DepartamentoUpdate.as_view(), name='departamento-update'),
-    path('deletar/<int:pk>/', DepartamentoDelete.as_view(), name='departamento-delete'),
+    path('', DepartamentoList.as_view(), name='departamento_list'),
+    path('criar/', DepartamentoCreate.as_view(), name='departamento_create'),
+    path('atualizar/<int:pk>/', DepartamentoUpdate.as_view(), name='departamento_update'),
+    path('deletar/<int:pk>/', DepartamentoDelete.as_view(), name='departamento_delete'),
 ]
