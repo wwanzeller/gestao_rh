@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Horas Extras{% endblock %}
+{% block main %}
+<ul>
+{% for horaExtra in object_list %}
+    <li>Funcionário: {{ horaExtra.funcionario }} - Motivo: {{ horaExtra.motivo }} - Horas: {{ horaExtra.horas }}</li>
+{% empty %}
+    <li>Ainda não existe nenhuma hora extra</li>
+{% endfor %}
+</ul>
+{% endblock %}
