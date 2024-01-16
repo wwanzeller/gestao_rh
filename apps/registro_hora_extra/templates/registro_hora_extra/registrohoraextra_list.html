@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+
 {% block title %}Horas Extras{% endblock %}
+
 {% block main %}
 <ul>
+    <a href="{% url 'horaextra_create' %}" class="btn btn-info mt-3">Criar Hora Extra</a><br><br>
 {% for horaExtra in object_list %}
-    <li>Funcionário: {{ horaExtra.funcionario }} - Motivo: {{ horaExtra.motivo }} - Horas: {{ horaExtra.horas }}</li>
+    <li>Funcionário: {{ horaExtra.funcionario }} - Motivo: {{ horaExtra.motivo }} - Horas: {{ horaExtra.horas }}
+        | <a href="{% url 'horaextra_update' horaExtra.id %}"> Atualizar</a>
+        | <a href="{% url 'horaextra_delete' horaExtra.id %}">Deletar</a></li>
 {% empty %}
     <li>Ainda não existe nenhuma hora extra</li>
 {% endfor %}
