@@ -9,15 +9,26 @@
         <button type="submit">Enviar</button>
     </form>
     <br>
+    <h2>Documentos</h2>
     {% if object %}
-        <a href="{% url 'documento_create' object.id %}" class="btn btn-success">
-            Adicionar documento
-        </a>
+        <a href="{% url 'documento_create' object.id %}" class="btn btn-success">Adicionar documento</a>
         <br><br>
         {% for documento in object.documento_set.all %}
-            <a href="{{ documento.arquivo.url }}" target="_blank">{{ documento }}</a>
-            <br>
+        <ul>
+            <li>
+                <a href="{{ documento.arquivo.url }}" target="_blank">{{ documento }}</a>
+            </li>
+        </ul>
         {% endfor %}
-
+    <br>
+    <h2>Registro de Horas Extras</h2>
+        {% for horaextra in object.registrohoraextra_set.all %}
+            <ul>
+                <li>{{ horaextra.motivo }} | {{ horaextra.horas }}</ul></li>
+            </ul>
+        {% endfor %}
     {% endif %}
+    <h2>Total de horas extras</h2>
+        O total de horas extras é {{ object.total_hora_extra }}.
 {% endblock %}
+
